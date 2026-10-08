@@ -12,6 +12,8 @@ export const userSchema: RxJsonSchema<UserDocType> = {
     },
     name: {
       type: "string",
+      minLength: 3,
+      maxLength: 50,
     },
   },
   required: ["id", "name"],

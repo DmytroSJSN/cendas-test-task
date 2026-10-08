@@ -1,4 +1,4 @@
-import { getDatabase } from "../index";
+import { getDatabase } from "../database";
 import type { UserCollection, UserDocument } from "./user.types";
 
 const getUsersCollection = async (): Promise<UserCollection> => {

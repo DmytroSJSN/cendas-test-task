@@ -11,9 +11,11 @@ if (import.meta.env.DEV) {
   addRxPlugin(RxDBDevModePlugin);
 }
 
-const storage = wrappedValidateAjvStorage({
-  storage: getRxStorageLocalstorage(),
-});
+const storage = import.meta.env.DEV
+  ? wrappedValidateAjvStorage({
+      storage: getRxStorageLocalstorage(),
+    })
+  : getRxStorageLocalstorage();
 
 const createDatabase = async (): Promise<AppDatabase> => {
   const db = await createRxDatabase<AppCollections>({

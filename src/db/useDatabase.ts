@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getDatabase } from "./index";
+import { getDatabase } from "./database";
 import type { AppDatabase } from "./types";
 
 export function useDatabase() {

@@ -1,8 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { RxDatabaseProvider } from "rxdb/plugins/react";
 import { useDatabase } from "./db/useDatabase";
 import AppLayout from "./components/layout/AppLayout";
+import RequireAuth from "./features/auth/guards/RequireAuth";
+import RequireGuest from "./features/auth/guards/RequireGuest";
 import LoginPage from "./features/auth/pages/LoginPage";
+import HomePage from "./features/home/pages/HomePage";
 
 const App = () => {
   const { database, error } = useDatabase();
@@ -21,7 +24,15 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route path="/login" element={<LoginPage />} />
+            <Route element={<RequireGuest />}>
+              <Route path="/login" element={<LoginPage />} />
+            </Route>
+
+            <Route element={<RequireAuth />}>
+              <Route path="/" element={<HomePage />} />
+            </Route>
+
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>
       </BrowserRouter>

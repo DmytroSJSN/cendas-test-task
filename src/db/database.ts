@@ -1,9 +1,9 @@
-import { addRxPlugin, createRxDatabase } from "rxdb";
-import { userSchema } from "./user/user.schema";
-import type { AppCollections, AppDatabase } from "./types";
+import { addRxPlugin } from "rxdb";
 import { RxDBDevModePlugin } from "rxdb/plugins/dev-mode";
 import { wrappedValidateAjvStorage } from "rxdb/plugins/validate-ajv";
 import { getRxStorageLocalstorage } from "rxdb/plugins/storage-localstorage";
+import { createDatabase } from "./create-database";
+import type { AppDatabase } from "./types";
 
 const DATABASE_NAME = "cendas";
 
@@ -17,26 +17,11 @@ const storage = import.meta.env.DEV
     })
   : getRxStorageLocalstorage();
 
-const createDatabase = async (): Promise<AppDatabase> => {
-  const db = await createRxDatabase<AppCollections>({
-    name: DATABASE_NAME,
-    storage,
-  });
-
-  await db.addCollections({
-    users: {
-      schema: userSchema,
-    },
-  });
-
-  return db;
-};
-
 let databasePromise: Promise<AppDatabase> | null = null;
 
 export function getDatabase(): Promise<AppDatabase> {
   if (databasePromise === null) {
-    databasePromise = createDatabase().catch((error) => {
+    databasePromise = createDatabase(DATABASE_NAME, storage).catch((error) => {
       databasePromise = null;
       throw error;
     });

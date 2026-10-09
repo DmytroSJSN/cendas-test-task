@@ -1,26 +1,15 @@
 import { findUserByName, insertUser } from "../db/user/user.repository";
 import type { User } from "../db/user/user.types";
+import { userInputSchema, type UserInput } from "../db/user/user.validation";
 
-export const getUserByName = async (
-  name: string,
-): Promise<User | null> => {
-  const normalizedName = normalizeName(name);
+export const getUserByName = async (input: UserInput): Promise<User | null> => {
+  const { name } = userInputSchema.parse(input);
 
-  return findUserByName(normalizedName);
+  return findUserByName(name);
 };
 
-export const createUser = async (name: string): Promise<User> => {
-  const normalizedName = normalizeName(name);
+export const createUser = async (input: UserInput): Promise<User> => {
+  const { name } = userInputSchema.parse(input);
 
-  return insertUser(normalizedName);
+  return insertUser(name);
 };
-
-function normalizeName(name: string): string {
-  const normalizedName = name.trim().toLowerCase();
-
-  if (normalizedName.length === 0) {
-    throw new Error("User name must not be empty");
-  }
-
-  return normalizedName;
-}

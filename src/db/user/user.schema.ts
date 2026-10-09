@@ -1,5 +1,6 @@
 import type { RxJsonSchema } from "rxdb";
 import type { User } from "./user.types";
+import { USER_NAME_MAX_LENGTH, USER_NAME_MIN_LENGTH } from "./user.constants";
 
 export const userSchema: RxJsonSchema<User> = {
   version: 0,
@@ -12,8 +13,8 @@ export const userSchema: RxJsonSchema<User> = {
     },
     name: {
       type: "string",
-      minLength: 3,
-      maxLength: 50,
+      minLength: USER_NAME_MIN_LENGTH,
+      maxLength: USER_NAME_MAX_LENGTH,
     },
   },
   required: ["id", "name"],

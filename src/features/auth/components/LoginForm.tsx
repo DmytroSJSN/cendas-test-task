@@ -4,6 +4,7 @@ import Button from "../../../components/ui/Button";
 import Form from "../../../components/ui/Form";
 import FormField from "../../../components/ui/FormField";
 import { loginOrCreate } from "../../../services/auth.service";
+import { handleZodError } from "../../../utils/handleZodError";
 import { loginSchema, type LoginFormValues } from "../schemas/login.schema";
 
 const LoginForm = () => {
@@ -12,8 +13,18 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (values: LoginFormValues) => {
-    const user = await loginOrCreate(values.name);
-    console.log(user);
+    try {
+      const user = await loginOrCreate(values);
+      console.log(user);
+    } catch (error) {
+      if (handleZodError(form.setError, error)) return;
+
+      console.error(error);
+      form.setError("root", {
+        type: "server",
+        message: "Something went wrong. Please try again.",
+      });
+    }
   };
 
   return (

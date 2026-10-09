@@ -1,11 +1,6 @@
 import { z } from "zod";
+import { userInputSchema } from "../../../db/user/user.validation";
 
-export const loginSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(3, "Enter at least 3 characters")
-    .max(50, "Name must be at most 50 characters"),
-});
+export const loginSchema = userInputSchema.pick({ name: true });
 
 export type LoginFormValues = z.infer<typeof loginSchema>;

@@ -5,7 +5,7 @@ const Header = () => {
   const user = useAuthStore((state) => state.user);
 
   return (
-    <header className="flex items-center justify-end gap-3 border-b border-zinc-800 px-4 py-3">
+    <header className="flex items-center justify-end gap-3 border-b border-border px-4 py-3">
       <span className="text-sm font-medium capitalize">{user?.name}</span>
       <LogoutButton />
     </header>

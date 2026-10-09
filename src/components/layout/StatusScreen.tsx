@@ -6,7 +6,7 @@ type StatusScreenProps = ComponentProps<"div">;
 const StatusScreen = ({ className, children }: StatusScreenProps) => (
   <div
     className={cn(
-      "flex min-h-dvh flex-col items-center justify-center gap-3 bg-zinc-900 px-4 text-zinc-100",
+      "flex min-h-dvh flex-col items-center justify-center gap-3 bg-background px-4 text-foreground",
       className,
     )}
   >

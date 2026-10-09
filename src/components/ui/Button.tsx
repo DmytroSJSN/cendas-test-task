@@ -2,9 +2,9 @@ import type { ComponentProps } from "react";
 import { cn } from "../../utils/cn";
 
 const variants = {
-  primary: "bg-zinc-100 text-zinc-900 hover:bg-white",
-  secondary: "bg-zinc-800 text-zinc-100 hover:bg-zinc-700",
-  ghost: "bg-transparent text-zinc-300 hover:bg-zinc-800",
+  primary: "bg-primary text-primary-foreground hover:bg-white",
+  secondary: "bg-secondary text-secondary-foreground hover:bg-secondary-hover",
+  ghost: "bg-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground",
 } as const;
 
 type ButtonProps = ComponentProps<"button"> & {

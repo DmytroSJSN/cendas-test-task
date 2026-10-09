@@ -8,7 +8,7 @@ interface LoadingPageProps {
 const LoadingPage = ({ message = "Loading…" }: LoadingPageProps) => (
   <StatusScreen>
     <Spinner size="lg" />
-    <p className="text-sm text-zinc-400">{message}</p>
+    <p className="text-sm text-muted-foreground">{message}</p>
   </StatusScreen>
 );
 

@@ -36,7 +36,7 @@ const FormField = <TFieldValues extends FieldValues = FieldValues>({
         <Input aria-invalid={!!error?.message} {...register(name)} {...props} />
       </label>
       {error?.message && (
-        <p role="alert" className="text-sm text-red-400">
+        <p role="alert" className="text-sm text-destructive">
           {error.message}
         </p>
       )}

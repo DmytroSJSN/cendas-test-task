@@ -13,10 +13,10 @@ const ErrorPage = ({
   onRetry = () => window.location.reload(),
 }: ErrorPageProps) => (
   <StatusScreen>
-    <div className="w-full max-w-md rounded-xl border border-zinc-800 bg-zinc-800/40 p-6 text-center">
+    <div className="w-full max-w-md rounded-xl border border-border bg-card/40 p-6 text-center">
       <h1 className="font-medium">{title}</h1>
       {message && (
-        <p className="mt-2 text-sm break-words text-zinc-400">{message}</p>
+        <p className="mt-2 text-sm break-words text-muted-foreground">{message}</p>
       )}
       <Button className="mt-5" onClick={onRetry}>
         Reload

@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@theme {
+  --color-background: var(--color-zinc-900);
+  --color-foreground: var(--color-zinc-100);
+  --color-card: var(--color-zinc-800);
+  --color-primary: var(--color-zinc-100);
+  --color-primary-foreground: var(--color-zinc-900);
+  --color-secondary: var(--color-zinc-800);
+  --color-secondary-foreground: var(--color-zinc-100);
+  --color-secondary-hover: var(--color-zinc-700);
+  --color-input: var(--color-zinc-600);
+  --color-ring: var(--color-zinc-400);
+  --color-accent: var(--color-zinc-800);
+  --color-accent-foreground: var(--color-zinc-100);
+  --color-destructive: var(--color-red-400);
+  --color-border: var(--color-zinc-800);
+  --color-muted-foreground: var(--color-zinc-400);
+}

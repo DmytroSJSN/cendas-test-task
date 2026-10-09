@@ -18,7 +18,7 @@ const Spinner = ({ size = "md", className, ...props }: SpinnerProps) => {
       fill="none"
       role="status"
       aria-label="Loading"
-      className={cn("animate-spin text-zinc-100", sizes[size], className)}
+      className={cn("animate-spin text-foreground", sizes[size], className)}
       {...props}
     >
       <circle

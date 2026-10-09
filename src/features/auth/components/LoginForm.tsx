@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import Button from "../../../components/ui/Button";
 import Form from "../../../components/ui/Form";
 import FormField from "../../../components/ui/FormField";
+import { loginOrCreate } from "../../../services/auth.service";
 import { loginSchema, type LoginFormValues } from "../schemas/login.schema";
 
 const LoginForm = () => {
@@ -10,8 +11,9 @@ const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (values: LoginFormValues) => {
-    console.log(values);
+  const onSubmit = async (values: LoginFormValues) => {
+    const user = await loginOrCreate(values.name);
+    console.log(user);
   };
 
   return (

@@ -1,9 +1,8 @@
-import type { RxCollection, RxDocument } from "rxdb";
+import type { RxCollection } from "rxdb";
 
-export type UserDocType = {
+export type User = {
   id: string;
   name: string;
 };
 
-export type UserDocument = RxDocument<UserDocType>;
-export type UserCollection = RxCollection<UserDocType>;
+export type UserCollection = RxCollection<User>;

@@ -1,7 +1,7 @@
 import type { RxJsonSchema } from "rxdb";
-import type { UserDocType } from "./user.types";
+import type { User } from "./user.types";
 
-export const userSchema: RxJsonSchema<UserDocType> = {
+export const userSchema: RxJsonSchema<User> = {
   version: 0,
   primaryKey: "id",
   type: "object",

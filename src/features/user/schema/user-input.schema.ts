@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { USER_NAME_MAX_LENGTH, USER_NAME_MIN_LENGTH } from "../user.constants";
+import { USER_NAME_MAX_LENGTH, USER_NAME_MIN_LENGTH } from "../../../db/user/user.constants";
 
 export const userInputSchema = z.object({
   name: z

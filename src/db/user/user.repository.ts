@@ -7,14 +7,6 @@ const getUsersCollection = async (): Promise<UserCollection> => {
   return db.users;
 };
 
-export const findUserByName = async (name: string): Promise<User | null> => {
-  const users = await getUsersCollection();
-
-  const user = await users.findOne({ selector: { name } }).exec();
-
-  return user?.toJSON() ?? null;
-};
-
 export const insertUserIfNotExists = async (user: User): Promise<User> => {
   const users = await getUsersCollection();
 

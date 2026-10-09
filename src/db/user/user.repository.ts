@@ -15,10 +15,10 @@ export const findUserByName = async (name: string): Promise<User | null> => {
   return user?.toJSON() ?? null;
 };
 
-export const insertUser = async (name: string): Promise<User> => {
+export const insertUserIfNotExists = async (user: User): Promise<User> => {
   const users = await getUsersCollection();
 
-  const user = await users.insert({ id: crypto.randomUUID(), name });
+  const userDocument = await users.insertIfNotExists(user);
 
-  return user.toJSON();
+  return userDocument.toJSON();
 };

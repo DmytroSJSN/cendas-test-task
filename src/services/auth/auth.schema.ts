@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { userInputSchema } from "../../../db/user/user.validation";
+import { userInputSchema } from "../user/user.validation";
 
 export const loginSchema = userInputSchema.pick({ name: true });
 

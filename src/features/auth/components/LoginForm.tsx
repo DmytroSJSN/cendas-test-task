@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import Button from "../../../components/ui/Button";
 import Form from "../../../components/ui/Form";
 import FormField from "../../../components/ui/FormField";
-import { loginOrCreate } from "../../../services/auth.service";
+import { loginSchema, type LoginFormValues } from "../../../services/auth/auth.schema";
+import { loginOrCreate } from "../../../services/auth/auth.service";
 import { handleZodError } from "../../../utils/handleZodError";
-import { loginSchema, type LoginFormValues } from "../schemas/login.schema";
 
 const LoginForm = () => {
   const form = useForm<LoginFormValues>({

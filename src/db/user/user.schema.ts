@@ -1,6 +1,6 @@
 import type { RxJsonSchema } from "rxdb";
 import type { User } from "./user.types";
-import { USER_NAME_MAX_LENGTH, USER_NAME_MIN_LENGTH } from "./user.constants";
+import { USER_NAME_MAX_LENGTH, USER_NAME_MIN_LENGTH } from "../../services/user/user.constants";
 
 export const userSchema: RxJsonSchema<User> = {
   version: 0,

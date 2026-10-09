@@ -13,5 +13,6 @@ export const userInputSchema = z.object({
     .max(
       USER_NAME_MAX_LENGTH,
       `Name must be at most ${USER_NAME_MAX_LENGTH} characters`,
-    ),
+    )
+    .regex(/^[^"]+$/, "Name cannot contain double quotes"),
 });

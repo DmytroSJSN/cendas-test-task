@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { getRxStorageMemory } from "rxdb/plugins/storage-memory";
+import { z } from "zod";
 
 import { createDatabase } from "../../../db/create-database";
 import type { AppDatabase } from "../../../db/types";
@@ -56,5 +57,25 @@ describe("loginOrCreate", () => {
 
     const users = await readUsers();
     expect(users).toEqual([{ name: "alice" }, { name: "bob" }]);
+  });
+
+  it("rejects invalid names without writing anything", async () => {
+    const invalidNames = ["a", "  ", "x".repeat(51), 'Al"ice'];
+
+    for (const name of invalidNames) {
+      await expect(loginOrCreate({ name })).rejects.toThrow(z.ZodError);
+    }
+
+    const users = await readUsers();
+    expect(users).toEqual([]);
+  });
+
+  it("trims surrounding whitespace", async () => {
+    const user = await loginOrCreate({ name: "  Alice  " });
+
+    expect(user).toEqual({ name: "alice" });
+
+    const users = await readUsers();
+    expect(users).toEqual([{ name: "alice" }]);
   });
 });

@@ -8,7 +8,7 @@ import LoadingPage from "./components/pages/LoadingPage";
 import RequireAuth from "./features/auth/guards/RequireAuth";
 import RequireGuest from "./features/auth/guards/RequireGuest";
 import LoginPage from "./features/auth/pages/LoginPage";
-import HomePage from "./features/home/pages/HomePage";
+import PlanPage from "./features/plan/pages/PlanPage";
 
 const App = () => {
   const { database, error } = useDatabase();
@@ -34,7 +34,7 @@ const App = () => {
 
             <Route element={<RequireAuth />}>
               <Route element={<AuthLayout />}>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<PlanPage />} />
               </Route>
             </Route>
 

@@ -15,7 +15,7 @@ const Button = ({ variant = "primary", className, ...props }: ButtonProps) => {
   return (
     <button
       className={cn(
-        "cursor-pointer rounded-lg px-4 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50",
+        "inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50",
         variants[variant],
         className,
       )}

@@ -36,11 +36,12 @@ export const updateOwnedTask = async (
     return null;
   }
 
-  const updatedDocument = await taskDocument.incrementalModify((current) => ({
-    ...current,
-    ...buildUpdate(current),
-    updatedAt: Date.now(),
-  }));
+  const updatedDocument = await taskDocument.incrementalModify((current) => {
+    const { title = current.title, checklist = current.checklist } =
+      buildUpdate(current);
+
+    return { ...current, title, checklist, updatedAt: Date.now() };
+  });
 
   return updatedDocument.toMutableJSON();
 };

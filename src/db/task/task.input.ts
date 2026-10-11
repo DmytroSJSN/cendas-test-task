@@ -8,3 +8,5 @@ export type NewTask = Omit<
 > & {
   checklist: NewStep[];
 };
+
+export type TaskUpdate = Partial<Pick<Task, "title" | "checklist">>;

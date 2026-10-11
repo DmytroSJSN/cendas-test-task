@@ -53,10 +53,7 @@ export async function updateTaskTitle(
 ): Promise<Task> {
   const { title } = updateTaskTitleInputSchema.parse(input);
 
-  const task = await updateOwnedTask(taskId, ownerName, (current) => ({
-    ...current,
-    title,
-  }));
+  const task = await updateOwnedTask(taskId, ownerName, () => ({ title }));
 
   if (!task) {
     throw new NotFoundError("Task", taskId);
@@ -99,7 +96,7 @@ export async function addStep(
 
     checklistSchema.parse(nextChecklist);
 
-    return { ...current, checklist: nextChecklist };
+    return { checklist: nextChecklist };
   });
 
   if (!task) {
@@ -125,7 +122,7 @@ export async function deleteStep(
 
     checklistSchema.parse(nextChecklist);
 
-    return { ...current, checklist: nextChecklist };
+    return { checklist: nextChecklist };
   });
 
   if (!task) {
@@ -147,7 +144,6 @@ async function patchStep(
     }
 
     return {
-      ...current,
       checklist: current.checklist.map((step) =>
         step.id === stepId ? { ...step, ...patch } : step,
       ),

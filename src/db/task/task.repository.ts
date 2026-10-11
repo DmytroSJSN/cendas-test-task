@@ -1,6 +1,6 @@
 import { generateId } from "../../utils/generateId";
 import { getDatabase } from "../database";
-import type { NewStep, NewTask } from "./task.input";
+import type { NewStep, NewTask, TaskUpdate } from "./task.input";
 import type { Step, Task, TaskCollection } from "./task.types";
 
 const getTasksCollection = async (): Promise<TaskCollection> => {
@@ -28,7 +28,7 @@ export const findTasksByOwner = async (ownerName: string): Promise<Task[]> => {
 export const updateOwnedTask = async (
   taskId: string,
   ownerName: string,
-  mutate: (task: Task) => Task,
+  buildUpdate: (task: Task) => TaskUpdate,
 ): Promise<Task | null> => {
   const taskDocument = await findOwnedTaskDocument(taskId, ownerName);
 
@@ -37,7 +37,8 @@ export const updateOwnedTask = async (
   }
 
   const updatedDocument = await taskDocument.incrementalModify((current) => ({
-    ...mutate(current),
+    ...current,
+    ...buildUpdate(current),
     updatedAt: Date.now(),
   }));
 

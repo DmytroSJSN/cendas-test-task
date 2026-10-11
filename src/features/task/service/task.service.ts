@@ -1,4 +1,5 @@
 import {
+  deleteOwnedTask,
   findTasksByOwner,
   insertTask,
   updateOwnedTask,
@@ -28,6 +29,17 @@ export async function createTask(
   const task = createTaskInputSchema.parse(input);
 
   return insertTask({ ...task, marker, ownerName });
+}
+
+export async function deleteTask(
+  taskId: string,
+  ownerName: string,
+): Promise<void> {
+  const deleted = await deleteOwnedTask(taskId, ownerName);
+
+  if (!deleted) {
+    throw new NotFoundError("Task", taskId);
+  }
 }
 
 export async function updateTaskTitle(

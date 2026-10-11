@@ -64,3 +64,18 @@ export const insertTask = async (input: NewTask): Promise<Task> => {
 
   return taskDocument.toMutableJSON();
 };
+
+export const deleteOwnedTask = async (
+  taskId: string,
+  ownerName: string,
+): Promise<boolean> => {
+  const taskDocument = await findOwnedTaskDocument(taskId, ownerName);
+
+  if (!taskDocument) {
+    return false;
+  }
+
+  await taskDocument.remove();
+
+  return true;
+};

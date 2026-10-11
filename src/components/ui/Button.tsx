@@ -4,7 +4,8 @@ import { cn } from "../../utils/cn";
 const variants = {
   primary: "bg-primary text-primary-foreground hover:bg-white",
   secondary: "bg-secondary text-secondary-foreground hover:bg-secondary-hover",
-  ghost: "bg-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+  ghost:
+    "bg-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground",
 } as const;
 
 type ButtonProps = ComponentProps<"button"> & {
@@ -15,7 +16,7 @@ const Button = ({ variant = "primary", className, ...props }: ButtonProps) => {
   return (
     <button
       className={cn(
-        "inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50",
+        "inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition disabled:cursor-not-allowed disabled:opacity-50",
         variants[variant],
         className,
       )}

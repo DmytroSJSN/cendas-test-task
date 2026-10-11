@@ -1,7 +1,6 @@
 import {
   createNewStep,
   deleteOwnedTask,
-  findTasksByOwner,
   insertTask,
   updateOwnedTask,
 } from "../../../db/task/task.repository";
@@ -20,10 +19,6 @@ import {
   type UpdateStepTitleInput,
   type UpdateTaskTitleInput,
 } from "../schema/task-input.schema";
-
-export async function getOwnTasks(ownerName: string): Promise<Task[]> {
-  return findTasksByOwner(ownerName);
-}
 
 export async function createTask(
   input: CreateTaskInput,

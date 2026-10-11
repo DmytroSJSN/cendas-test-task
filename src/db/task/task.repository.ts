@@ -15,16 +15,6 @@ const findOwnedTaskDocument = async (taskId: string, ownerName: string) => {
   return tasks.findOne({ selector: { id: taskId, ownerName } }).exec();
 };
 
-export const findTasksByOwner = async (ownerName: string): Promise<Task[]> => {
-  const tasks = await getTasksCollection();
-
-  const taskDocuments = await tasks
-    .find({ selector: { ownerName }, sort: [{ createdAt: "desc" }] })
-    .exec();
-
-  return taskDocuments.map((taskDocument) => taskDocument.toMutableJSON());
-};
-
 export const updateOwnedTask = async (
   taskId: string,
   ownerName: string,

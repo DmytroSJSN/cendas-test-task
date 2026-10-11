@@ -1,4 +1,5 @@
 import {
+  createNewStep,
   deleteOwnedTask,
   findTasksByOwner,
   insertTask,
@@ -7,10 +8,13 @@ import {
 import type { Marker, Step, Task } from "../../../db/task/task.types";
 import { NotFoundError } from "../../../errors/not-found.error";
 import {
+  checklistSchema,
   createTaskInputSchema,
+  stepInputSchema,
   updateStepStatusInputSchema,
   updateStepTitleInputSchema,
   updateTaskTitleInputSchema,
+  type AddStepInput,
   type CreateTaskInput,
   type UpdateStepStatusInput,
   type UpdateStepTitleInput,
@@ -81,6 +85,54 @@ export async function updateStepStatus(
   const patch = updateStepStatusInputSchema.parse(input);
 
   return patchStep(taskId, stepId, patch, ownerName);
+}
+
+export async function addStep(
+  taskId: string,
+  input: AddStepInput,
+  ownerName: string,
+): Promise<Task> {
+  const step = stepInputSchema.parse(input);
+
+  const task = await updateOwnedTask(taskId, ownerName, (current) => {
+    const nextChecklist = [...current.checklist, createNewStep(step)];
+
+    checklistSchema.parse(nextChecklist);
+
+    return { ...current, checklist: nextChecklist };
+  });
+
+  if (!task) {
+    throw new NotFoundError("Task", taskId);
+  }
+
+  return task;
+}
+
+export async function deleteStep(
+  taskId: string,
+  stepId: string,
+  ownerName: string,
+): Promise<Task> {
+  const task = await updateOwnedTask(taskId, ownerName, (current) => {
+    if (!current.checklist.some((step) => step.id === stepId)) {
+      throw new NotFoundError("Step", stepId);
+    }
+
+    const nextChecklist = current.checklist.filter(
+      (step) => step.id !== stepId,
+    );
+
+    checklistSchema.parse(nextChecklist);
+
+    return { ...current, checklist: nextChecklist };
+  });
+
+  if (!task) {
+    throw new NotFoundError("Task", taskId);
+  }
+
+  return task;
 }
 
 async function patchStep(

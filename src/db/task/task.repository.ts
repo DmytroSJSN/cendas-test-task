@@ -1,7 +1,7 @@
 import { generateId } from "../../utils/generateId";
 import { getDatabase } from "../database";
-import type { NewTask } from "./task.input";
-import type { Task, TaskCollection } from "./task.types";
+import type { NewStep, NewTask } from "./task.input";
+import type { Step, Task, TaskCollection } from "./task.types";
 
 const getTasksCollection = async (): Promise<TaskCollection> => {
   const db = await getDatabase();
@@ -44,15 +44,17 @@ export const updateOwnedTask = async (
   return updatedDocument.toMutableJSON();
 };
 
+export const createNewStep = (step: NewStep): Step => ({
+  ...step,
+  id: generateId(),
+});
+
 export const insertTask = async (input: NewTask): Promise<Task> => {
   const tasks = await getTasksCollection();
 
   const now = Date.now();
 
-  const checklist = input.checklist.map((step) => ({
-    ...step,
-    id: generateId(),
-  }));
+  const checklist = input.checklist.map(createNewStep);
 
   const taskDocument = await tasks.insert({
     ...input,

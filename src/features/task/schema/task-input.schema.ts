@@ -8,24 +8,30 @@ import {
   TASK_TITLE_MAX_LENGTH,
   TASK_TITLE_MIN_LENGTH,
 } from "../../../db/task/task.constants";
-import {
-  maxMessage,
-  minMessage,
-} from "../../../utils/validationMessages";
+import { maxMessage, minMessage } from "../../../utils/validationMessages";
 
-const stepInputSchema = z.object({
+export const stepInputSchema = z.object({
   title: z
     .string()
     .trim()
     .min(STEP_TITLE_MIN_LENGTH, minMessage("Step title", STEP_TITLE_MIN_LENGTH))
-    .max(STEP_TITLE_MAX_LENGTH, maxMessage("Step title", STEP_TITLE_MAX_LENGTH)),
+    .max(
+      STEP_TITLE_MAX_LENGTH,
+      maxMessage("Step title", STEP_TITLE_MAX_LENGTH),
+    ),
   status: z.enum(STEP_STATUSES),
 });
 
-const checklistSchema = z
+export const checklistSchema = z
   .array(stepInputSchema)
-  .min(CHECKLIST_MIN_STEPS, minMessage("Checklist", CHECKLIST_MIN_STEPS, "step"))
-  .max(CHECKLIST_MAX_STEPS, maxMessage("Checklist", CHECKLIST_MAX_STEPS, "step"));
+  .min(
+    CHECKLIST_MIN_STEPS,
+    minMessage("Checklist", CHECKLIST_MIN_STEPS, "step"),
+  )
+  .max(
+    CHECKLIST_MAX_STEPS,
+    maxMessage("Checklist", CHECKLIST_MAX_STEPS, "step"),
+  );
 
 export const createTaskInputSchema = z.object({
   title: z
@@ -50,3 +56,4 @@ export type CreateTaskInput = z.infer<typeof createTaskInputSchema>;
 export type UpdateTaskTitleInput = z.infer<typeof updateTaskTitleInputSchema>;
 export type UpdateStepTitleInput = z.infer<typeof updateStepTitleInputSchema>;
 export type UpdateStepStatusInput = z.infer<typeof updateStepStatusInputSchema>;
+export type AddStepInput = z.infer<typeof stepInputSchema>;

@@ -9,6 +9,16 @@ const getTasksCollection = async (): Promise<TaskCollection> => {
   return db.tasks;
 };
 
+export const findTasksByOwner = async (ownerName: string): Promise<Task[]> => {
+  const tasks = await getTasksCollection();
+
+  const taskDocuments = await tasks
+    .find({ selector: { ownerName }, sort: [{ createdAt: "desc" }] })
+    .exec();
+
+  return taskDocuments.map((taskDocument) => taskDocument.toMutableJSON());
+};
+
 export const insertTask = async (input: NewTask): Promise<Task> => {
   const tasks = await getTasksCollection();
 

@@ -1,5 +1,6 @@
 import { createRxDatabase } from "rxdb";
 import type { RxDatabaseCreator } from "rxdb";
+import { taskSchema } from "./task/task.schema";
 import { userSchema } from "./user/user.schema";
 import type { AppCollections, AppDatabase } from "./types";
 
@@ -17,6 +18,9 @@ export async function createDatabase(
   await db.addCollections({
     users: {
       schema: userSchema,
+    },
+    tasks: {
+      schema: taskSchema,
     },
   });
 

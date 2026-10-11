@@ -36,4 +36,17 @@ export const createTaskInputSchema = z.object({
   checklist: checklistSchema,
 });
 
+export const updateTaskTitleInputSchema = createTaskInputSchema.pick({
+  title: true,
+});
+
+export const updateStepTitleInputSchema = stepInputSchema.pick({ title: true });
+
+export const updateStepStatusInputSchema = stepInputSchema.pick({
+  status: true,
+});
+
 export type CreateTaskInput = z.infer<typeof createTaskInputSchema>;
+export type UpdateTaskTitleInput = z.infer<typeof updateTaskTitleInputSchema>;
+export type UpdateStepTitleInput = z.infer<typeof updateStepTitleInputSchema>;
+export type UpdateStepStatusInput = z.infer<typeof updateStepStatusInputSchema>;

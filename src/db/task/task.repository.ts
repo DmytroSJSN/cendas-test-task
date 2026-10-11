@@ -9,6 +9,12 @@ const getTasksCollection = async (): Promise<TaskCollection> => {
   return db.tasks;
 };
 
+const findOwnedTaskDocument = async (taskId: string, ownerName: string) => {
+  const tasks = await getTasksCollection();
+
+  return tasks.findOne({ selector: { id: taskId, ownerName } }).exec();
+};
+
 export const findTasksByOwner = async (ownerName: string): Promise<Task[]> => {
   const tasks = await getTasksCollection();
 
@@ -17,6 +23,25 @@ export const findTasksByOwner = async (ownerName: string): Promise<Task[]> => {
     .exec();
 
   return taskDocuments.map((taskDocument) => taskDocument.toMutableJSON());
+};
+
+export const updateOwnedTask = async (
+  taskId: string,
+  ownerName: string,
+  mutate: (task: Task) => Task,
+): Promise<Task | null> => {
+  const taskDocument = await findOwnedTaskDocument(taskId, ownerName);
+
+  if (!taskDocument) {
+    return null;
+  }
+
+  const updatedDocument = await taskDocument.incrementalModify((current) => ({
+    ...mutate(current),
+    updatedAt: Date.now(),
+  }));
+
+  return updatedDocument.toMutableJSON();
 };
 
 export const insertTask = async (input: NewTask): Promise<Task> => {

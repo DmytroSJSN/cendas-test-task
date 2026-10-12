@@ -69,7 +69,7 @@ export const deleteOwnedTask = async (
     return false;
   }
 
-  await taskDocument.remove();
+  await taskDocument.incrementalRemove();
 
   return true;
 };

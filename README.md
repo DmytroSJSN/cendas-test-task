@@ -1,5 +1,9 @@
 # Сendas Test Task
 
+## Video
+
+https://drive.google.com/file/d/1YZL9GSsdG7fnQcFuGwlAO3fNhg3AQZok/view?usp=sharing
+
 ## Tech stack
 
 | Category           | Technologies                                     |

@@ -32,7 +32,7 @@ const FormField = <TFieldValues extends FieldValues = FieldValues>({
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
       <label className="flex flex-col gap-1.5">
-        <span className="text-sm font-medium text-zinc-300">{label}</span>
+        <span className="text-sm font-medium text-foreground">{label}</span>
         <Input aria-invalid={!!error?.message} {...register(name)} {...props} />
       </label>
       {error?.message && (

@@ -6,6 +6,7 @@
   --color-card: var(--color-zinc-800);
   --color-primary: var(--color-zinc-100);
   --color-primary-foreground: var(--color-zinc-900);
+  --color-primary-hover: var(--color-zinc-300);
   --color-secondary: var(--color-zinc-800);
   --color-secondary-foreground: var(--color-zinc-100);
   --color-secondary-hover: var(--color-zinc-700);
@@ -14,6 +15,6 @@
   --color-accent: var(--color-zinc-800);
   --color-accent-foreground: var(--color-zinc-100);
   --color-destructive: var(--color-red-400);
-  --color-border: var(--color-zinc-800);
+  --color-border: var(--color-zinc-700);
   --color-muted-foreground: var(--color-zinc-400);
 }

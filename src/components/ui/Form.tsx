@@ -26,7 +26,7 @@ const Form = <T extends FieldValues>({
       <form onSubmit={form.handleSubmit(onSubmit)} {...props}>
         {children}
         {rootError?.message && (
-          <p role="alert" className="text-center text-sm text-red-400">
+          <p role="alert" className="text-center text-sm text-destructive">
             {rootError.message}
           </p>
         )}

@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 import { cn } from "../../utils/cn";
 
 const variants = {
-  primary: "bg-primary text-primary-foreground hover:bg-white",
+  primary: "bg-primary text-primary-foreground hover:bg-primary-hover",
   secondary: "bg-secondary text-secondary-foreground hover:bg-secondary-hover",
   ghost:
     "bg-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground",

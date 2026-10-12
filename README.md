@@ -1,3 +1,5 @@
+# Сendas Test Task
+
 ## Tech stack
 
 | Category           | Technologies                                     |
@@ -78,7 +80,7 @@ It supports installation and uses a service worker to cache assets for offline a
 1. **Sign in** — enter a name on the login screen and press **Continue**. Signing in again with the same name resumes the same account.
 2. **Place a task** — on the plan, click the location you want to mark. A draft marker appears and the creation panel opens.
 3. **Fill in the task** — provide a title and at least one checklist step; each step has a title. Add or remove steps as needed. Submit to save.
-4. **Manage tasks** — use the sidebar to browse your tasks; clicking a task focuses its marker on the list.
+4. **Manage tasks** — use the sidebar to browse your tasks; clicking a task focuses its marker on the plan.
 5. **Update progress** — edit a task's title, add/remove steps, and change step statuses from the checklist.
 
 ## Data storage
@@ -88,6 +90,7 @@ Everything lives in the browser; there is no server or external database.
 - RxDB database name: persisted in `localStorage`.
 - Session: Zustand store persisted under the `auth-storage` key.
 - Every task is scoped to its owner's name, so two names on the same browser keep separate tasks.
+- Ajv schema validation runs in **development only**: the dev build wraps the storage in `wrappedValidateAjvStorage`
 
 To wipe all local data, clear site data for the dev origin (`http://localhost:5173`) in your
 browser's DevTools → Application → Storage. Note that `localStorage` is per-origin, so data created
@@ -120,7 +123,6 @@ If I had more time, I would focus on the following refactoring and improvements.
 - **Task management** — add the ability to move and delete existing markers.
 - **Task filtering** — introduce search, status filters, and grouping in the sidebar.
 - **Task progress** — improve status calculation and display checklist progress on markers and in the sidebar.
-- **Update API** — improve the task update interface to make partial updates more flexible and easier to extend.
 - **Task and checklist editing** — improve the editing UI for a better user experience and refactor the update API to make partial updates more flexible and easier to extend.
 
 ### Tests

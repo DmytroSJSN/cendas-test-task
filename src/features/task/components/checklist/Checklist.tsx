@@ -25,6 +25,7 @@ const Checklist = ({ taskId, steps }: ChecklistProps) => {
         {steps.map((step) => (
           <ChecklistItem
             key={step.id}
+            taskId={taskId}
             step={step}
             canDelete={canDelete}
             onDelete={setStepToDelete}

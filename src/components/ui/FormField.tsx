@@ -13,7 +13,7 @@ type FormFieldProps<TFieldValues extends FieldValues> = Omit<
   "name"
 > & {
   name: FieldPath<TFieldValues>;
-  label: string;
+  label?: string;
 };
 
 const FormField = <TFieldValues extends FieldValues = FieldValues>({
@@ -32,7 +32,9 @@ const FormField = <TFieldValues extends FieldValues = FieldValues>({
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
       <label className="flex flex-col gap-1.5">
-        <span className="text-sm font-medium text-foreground">{label}</span>
+        {label && (
+          <span className="text-sm font-medium text-foreground">{label}</span>
+        )}
         <Input aria-invalid={!!error?.message} {...register(name)} {...props} />
       </label>
       {error?.message && (

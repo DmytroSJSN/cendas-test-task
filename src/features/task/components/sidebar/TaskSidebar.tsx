@@ -1,12 +1,18 @@
-import { useState } from "react";
+import type { Task } from "../../../../db/task/task.types";
 import { cn } from "../../../../utils/cn";
-import { useTasks } from "../../hooks/useTasks";
+import { useTaskUiStore } from "../../store/task-ui.store";
 import TaskList from "../task-list/TaskList";
 import TaskSidebarHandle from "./TaskSidebarHandle";
 
-const TaskSidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const { tasks, isLoading, error } = useTasks();
+interface TaskSidebarProps {
+  tasks: Task[];
+  isLoading: boolean;
+  error: string | null;
+}
+
+const TaskSidebar = ({ tasks, isLoading, error }: TaskSidebarProps) => {
+  const collapsed = useTaskUiStore((state) => state.sidebarCollapsed);
+  const toggleSidebar = useTaskUiStore((state) => state.toggleSidebar);
 
   return (
     <div
@@ -25,10 +31,7 @@ const TaskSidebar = () => {
           <TaskList tasks={tasks} isLoading={isLoading} error={error} />
         </div>
 
-        <TaskSidebarHandle
-          collapsed={collapsed}
-          onToggle={() => setCollapsed((current) => !current)}
-        />
+        <TaskSidebarHandle collapsed={collapsed} onToggle={toggleSidebar} />
       </aside>
     </div>
   );

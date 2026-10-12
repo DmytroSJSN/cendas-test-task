@@ -1,5 +1,6 @@
 import Spinner from "../../../../components/ui/Spinner";
 import type { Task } from "../../../../db/task/task.types";
+import { useTaskUiStore } from "../../store/task-ui.store";
 import TaskListItem from "./TaskListItem";
 
 interface TaskListProps {
@@ -9,6 +10,9 @@ interface TaskListProps {
 }
 
 const TaskList = ({ tasks, isLoading, error }: TaskListProps) => {
+  const selectedTaskId = useTaskUiStore((state) => state.selectedTaskId);
+  const toggleTask = useTaskUiStore((state) => state.toggleTask);
+
   if (isLoading) {
     return (
       <div className="flex h-full items-center justify-center">
@@ -32,9 +36,12 @@ const TaskList = ({ tasks, isLoading, error }: TaskListProps) => {
   return (
     <ul className="flex flex-col gap-2">
       {tasks.map((task) => (
-        <li key={task.id}>
-          <TaskListItem task={task} />
-        </li>
+        <TaskListItem
+          key={task.id}
+          task={task}
+          expanded={task.id === selectedTaskId}
+          onToggle={() => toggleTask(task.id)}
+        />
       ))}
     </ul>
   );

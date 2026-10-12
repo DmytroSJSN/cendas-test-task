@@ -7,6 +7,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { StepStatus, Task } from "../../../db/task/task.types";
+import { STEP_STATUS, STEP_STATUSES } from "../../../db/task/task.constants";
 
 type StepStatusDisplay = {
   label: string;
@@ -42,24 +43,32 @@ export const STEP_STATUS_DISPLAY: Record<StepStatus, StepStatusDisplay> = {
   },
 };
 
+export const STEP_STATUS_OPTIONS = STEP_STATUSES.map((status) => ({
+  value: status,
+  label: STEP_STATUS_DISPLAY[status].label,
+}));
+
 export const getTaskStatus = (task: Task): StepStatus => {
   const { checklist } = task;
 
-  if (checklist.length > 0 && checklist.every((step) => step.status === "done")) {
-    return "done";
+  if (
+    checklist.length > 0 &&
+    checklist.every((step) => step.status === STEP_STATUS.done)
+  ) {
+    return STEP_STATUS.done;
   }
 
-  if (checklist.some((step) => step.status === "blocked")) {
-    return "blocked";
+  if (checklist.some((step) => step.status === STEP_STATUS.blocked)) {
+    return STEP_STATUS.blocked;
   }
 
-  if (checklist.some((step) => step.status === "awaiting_final_check")) {
-    return "awaiting_final_check";
+  if (checklist.some((step) => step.status === STEP_STATUS.awaitingFinalCheck)) {
+    return STEP_STATUS.awaitingFinalCheck;
   }
 
-  if (checklist.some((step) => step.status === "in_progress")) {
-    return "in_progress";
+  if (checklist.some((step) => step.status === STEP_STATUS.inProgress)) {
+    return STEP_STATUS.inProgress;
   }
 
-  return "not_started";
+  return STEP_STATUS.notStarted;
 };

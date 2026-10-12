@@ -1,6 +1,7 @@
 import Spinner from "../../../../components/ui/Spinner";
 import type { Task } from "../../../../db/task/task.types";
 import { useTaskUiStore } from "../../store/task-ui.store";
+import TaskCreatePanel from "../create/TaskCreatePanel";
 import TaskListItem from "./TaskListItem";
 
 interface TaskListProps {
@@ -25,24 +26,24 @@ const TaskList = ({ tasks, isLoading, error }: TaskListProps) => {
     return <p className="px-1 py-2 text-destructive">Failed to load tasks.</p>;
   }
 
-  if (tasks.length === 0) {
-    return (
-      <p className="px-1 py-2 text-center text-muted-foreground">
-        No tasks yet
-      </p>
-    );
-  }
-
   return (
     <ul className="flex flex-col gap-2">
-      {tasks.map((task) => (
-        <TaskListItem
-          key={task.id}
-          task={task}
-          expanded={task.id === selectedTaskId}
-          onToggle={() => toggleTask(task.id)}
-        />
-      ))}
+      <TaskCreatePanel />
+
+      {tasks.length === 0 ? (
+        <li className="px-1 py-2 text-center text-muted-foreground">
+          No tasks yet
+        </li>
+      ) : (
+        tasks.map((task) => (
+          <TaskListItem
+            key={task.id}
+            task={task}
+            expanded={task.id === selectedTaskId}
+            onToggle={() => toggleTask(task.id)}
+          />
+        ))
+      )}
     </ul>
   );
 };

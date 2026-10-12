@@ -1,6 +1,8 @@
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
-import type { Task } from "../../../db/task/task.types";
 import plan from "../../../assets/img/plan.webp";
+import type { Task } from "../../../db/task/task.types";
+import { useDraftMarkerPlacement } from "../hooks/useDraftMarkerPlacement";
+import DraftTaskMarker from "./DraftTaskMarker";
 import TaskMarker from "./TaskMarker";
 import ZoomControls from "./ZoomControls";
 
@@ -9,6 +11,8 @@ interface PlanViewerProps {
 }
 
 const PlanViewer = ({ tasks }: PlanViewerProps) => {
+  const { draftMarker, onPointerDown, onClick } = useDraftMarkerPlacement();
+
   return (
     <TransformWrapper
       fitOnInit
@@ -24,12 +28,15 @@ const PlanViewer = ({ tasks }: PlanViewerProps) => {
           height: "100%",
           touchAction: "none",
         }}
+        contentClass="cursor-crosshair"
+        contentProps={{ onPointerDown, onClick }}
       >
         <div className="relative w-fit">
-          <img src={plan} alt="Floor plan" className="block" />
+          <img src={plan} alt="Floor plan" className="select-none" />
           {tasks.map((task) => (
             <TaskMarker key={task.id} task={task} />
           ))}
+          {draftMarker && <DraftTaskMarker marker={draftMarker} />}
         </div>
       </TransformComponent>
       <ZoomControls />

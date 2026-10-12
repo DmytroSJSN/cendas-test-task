@@ -8,7 +8,7 @@ const ZoomControls = () => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
 
   return (
-    <div className="absolute right-4 bottom-4 flex flex-col items-center gap-1 rounded-lg border border-border bg-card/80 p-1 backdrop-blur">
+    <div className="absolute right-4 bottom-4 flex flex-col items-center gap-1 rounded-lg border border-border bg-card p-1 backdrop-blur">
       <Button
         variant="secondary"
         className="size-9 p-0"

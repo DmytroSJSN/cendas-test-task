@@ -1,16 +1,18 @@
 import type { Step } from "../../../../db/task/task.types";
+import { STEP_STATUS_DISPLAY } from "../../constants/step-status.constants";
 
 interface ChecklistItemProps {
   step: Step;
 }
 
 const ChecklistItem = ({ step }: ChecklistItemProps) => {
+  const { label, Icon, className } = STEP_STATUS_DISPLAY[step.status];
+
   return (
-    <li className="flex gap-2 text-muted-foreground">
-      <span aria-hidden="true" className="text-border">
-        •
-      </span>
-      <span>{step.title}</span>
+    <li className="flex items-center gap-2 text-muted-foreground py-1">
+      <Icon className={className} />
+      <span className="truncate">{step.title}</span>
+      <span className="ml-auto shrink-0 text-xs">{label}</span>
     </li>
   );
 };

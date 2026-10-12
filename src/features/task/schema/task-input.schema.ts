@@ -2,6 +2,7 @@ import { z } from "zod";
 import {
   CHECKLIST_MAX_STEPS,
   CHECKLIST_MIN_STEPS,
+  DEFAULT_STEP_STATUS,
   STEP_STATUSES,
   STEP_TITLE_MAX_LENGTH,
   STEP_TITLE_MIN_LENGTH,
@@ -57,3 +58,25 @@ export type UpdateTaskTitleInput = z.infer<typeof updateTaskTitleInputSchema>;
 export type UpdateStepTitleInput = z.infer<typeof updateStepTitleInputSchema>;
 export type UpdateStepStatusInput = z.infer<typeof updateStepStatusInputSchema>;
 export type AddStepInput = z.infer<typeof stepInputSchema>;
+
+export const createEmptyStep = (): AddStepInput => ({
+  title: "",
+  status: DEFAULT_STEP_STATUS,
+});
+
+const DEFAULT_STEP_TITLES = [
+  "Initial assessment",
+  "Installation",
+  "Final inspection",
+] as const;
+
+const createDefaultSteps = (): AddStepInput[] =>
+  DEFAULT_STEP_TITLES.map((title) => ({
+    title,
+    status: DEFAULT_STEP_STATUS,
+  }));
+
+export const DEFAULT_VALUES: CreateTaskInput = {
+  title: "",
+  checklist: createDefaultSteps(),
+};

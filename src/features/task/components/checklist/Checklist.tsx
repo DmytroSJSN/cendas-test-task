@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { CHECKLIST_MIN_STEPS } from "../../../../db/task/task.constants";
+import {
+  CHECKLIST_MAX_STEPS,
+  CHECKLIST_MIN_STEPS,
+} from "../../../../db/task/task.constants";
 import type { Step } from "../../../../db/task/task.types";
+import ChecklistAddStep from "./ChecklistAddStep";
 import ChecklistItem from "./ChecklistItem";
 import DeleteStepModal from "./DeleteStepModal";
 
@@ -13,6 +17,7 @@ const Checklist = ({ taskId, steps }: ChecklistProps) => {
   const [stepToDelete, setStepToDelete] = useState<Step | null>(null);
 
   const canDelete = steps.length > CHECKLIST_MIN_STEPS;
+  const canAdd = steps.length < CHECKLIST_MAX_STEPS;
 
   return (
     <>
@@ -26,6 +31,8 @@ const Checklist = ({ taskId, steps }: ChecklistProps) => {
           />
         ))}
       </ul>
+
+      <ChecklistAddStep taskId={taskId} canAdd={canAdd} />
 
       {stepToDelete && (
         <DeleteStepModal

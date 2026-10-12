@@ -5,17 +5,11 @@ import FormField from "../../../../components/ui/FormField";
 import {
   CHECKLIST_MAX_STEPS,
   CHECKLIST_MIN_STEPS,
-  DEFAULT_STEP_STATUS,
 } from "../../../../db/task/task.constants";
 import {
-  type AddStepInput,
+  createEmptyStep,
   type CreateTaskInput,
 } from "../../schema/task-input.schema";
-
-const createEmptyStep = (): AddStepInput => ({
-  title: "",
-  status: DEFAULT_STEP_STATUS,
-});
 
 const TaskCreateSteps = () => {
   const { fields, append, remove } = useFieldArray<CreateTaskInput>({

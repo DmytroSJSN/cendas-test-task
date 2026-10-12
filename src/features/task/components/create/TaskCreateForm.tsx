@@ -3,13 +3,12 @@ import { useForm } from "react-hook-form";
 import Button from "../../../../components/ui/Button";
 import Form from "../../../../components/ui/Form";
 import FormField from "../../../../components/ui/FormField";
-import { DEFAULT_STEP_STATUS } from "../../../../db/task/task.constants";
 import type { Marker, Task } from "../../../../db/task/task.types";
 import { handleZodError } from "../../../../utils/handleZodError";
 import { useCreateTask } from "../../hooks/useCreateTask";
 import {
   createTaskInputSchema,
-  type AddStepInput,
+  DEFAULT_VALUES,
   type CreateTaskInput,
 } from "../../schema/task-input.schema";
 import TaskCreateSteps from "./TaskCreateSteps";
@@ -19,23 +18,6 @@ interface TaskCreateFormProps {
   onCreated: (task: Task) => void;
   onCancel: () => void;
 }
-
-const DEFAULT_STEP_TITLES = [
-  "Initial assessment",
-  "Installation",
-  "Final inspection",
-] as const;
-
-const createDefaultSteps = (): AddStepInput[] =>
-  DEFAULT_STEP_TITLES.map((title) => ({
-    title,
-    status: DEFAULT_STEP_STATUS,
-  }));
-
-const DEFAULT_VALUES: CreateTaskInput = {
-  title: "",
-  checklist: createDefaultSteps(),
-};
 
 const TaskCreateForm = ({
   marker,

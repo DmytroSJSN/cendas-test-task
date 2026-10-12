@@ -76,7 +76,7 @@ const StepStatusEditor = ({ taskId, step, onClose }: StepStatusEditorProps) => {
 
         <Button
           type="submit"
-          variant="ghost"
+          variant="secondary"
           aria-label="Save step status"
           disabled={isSubmitting}
           className="size-8 shrink-0 p-0"
@@ -86,7 +86,7 @@ const StepStatusEditor = ({ taskId, step, onClose }: StepStatusEditorProps) => {
 
         <Button
           type="button"
-          variant="ghost"
+          variant="secondary"
           aria-label="Cancel step status editing"
           disabled={isSubmitting}
           onClick={onClose}

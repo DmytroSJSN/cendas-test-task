@@ -74,7 +74,7 @@ const StepTitleEditor = ({ taskId, step, onClose }: StepTitleEditorProps) => {
 
         <Button
           type="submit"
-          variant="ghost"
+          variant="secondary"
           aria-label="Save step title"
           disabled={isSubmitting}
           className="size-8 shrink-0 p-0"
@@ -84,7 +84,7 @@ const StepTitleEditor = ({ taskId, step, onClose }: StepTitleEditorProps) => {
 
         <Button
           type="button"
-          variant="ghost"
+          variant="secondary"
           aria-label="Cancel step title editing"
           disabled={isSubmitting}
           onClick={onClose}

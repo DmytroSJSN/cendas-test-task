@@ -6,6 +6,7 @@ const variants = {
   secondary: "bg-secondary text-secondary-foreground hover:bg-secondary-hover",
   ghost:
     "bg-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+  destructive: "bg-destructive text-background hover:bg-destructive/80",
 } as const;
 
 type ButtonProps = ComponentProps<"button"> & {

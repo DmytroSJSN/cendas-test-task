@@ -68,7 +68,7 @@ const TaskListItem = ({ task, expanded, onToggle }: TaskListItemProps) => {
       >
         <div className="overflow-hidden">
           <div className="border-t border-border px-3 py-2">
-            <Checklist steps={task.checklist} />
+            <Checklist taskId={task.id} steps={task.checklist} />
           </div>
         </div>
       </div>

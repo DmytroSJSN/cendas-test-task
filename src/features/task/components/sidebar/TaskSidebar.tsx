@@ -17,7 +17,7 @@ const TaskSidebar = ({ tasks, isLoading, error }: TaskSidebarProps) => {
   return (
     <div
       className={cn(
-        "absolute inset-y-0 left-0 z-10 w-80 transition-transform duration-300 ease-in-out",
+        "absolute inset-y-0 left-0 z-10 w-1/2 min-w-64 max-w-96 transition-transform duration-300 ease-in-out",
         collapsed && "-translate-x-full",
       )}
     >

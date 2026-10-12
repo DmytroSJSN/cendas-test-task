@@ -11,6 +11,7 @@ type TaskUiState = {
   toggleSidebar: () => void;
   setDraftMarker: (marker: Marker) => void;
   clearDraftMarker: () => void;
+  reset: () => void;
 };
 
 export const useTaskUiStore = create<TaskUiState>()(
@@ -34,6 +35,12 @@ export const useTaskUiStore = create<TaskUiState>()(
           selectedTaskId: null,
         }),
       clearDraftMarker: () => set({ draftMarker: null }),
+      reset: () =>
+        set({
+          selectedTaskId: null,
+          sidebarCollapsed: false,
+          draftMarker: null,
+        }),
     }),
     {
       name: "task-ui-storage",

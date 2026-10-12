@@ -37,6 +37,7 @@ const TaskCreateSteps = () => {
               />
             </div>
             <Button
+              type="button"
               variant="ghost"
               aria-label={`Remove step ${index + 1}`}
               disabled={!canRemove}

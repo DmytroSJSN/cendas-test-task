@@ -65,6 +65,15 @@ database directly; services parse input with Zod and repositories own the querie
 The application is built as a Progressive Web App (PWA) using `vite-plugin-pwa`.
 It supports installation and uses a service worker to cache assets for offline access.
 
+To verify offline mode:
+
+1. `npm run build && npm run preview`
+2. Open the preview URL online once — the service worker installs and caches the assets.
+3. Go **Offline** in DevTools (Network tab), then do a normal reload.
+
+The service worker is not registered under `npm run dev`, so offline mode can only be checked on the
+preview build.
+
 ## Features
 
 - **Name-only sign-in** — no password; a name is normalized (trimmed, lowercased) and reused if it
@@ -83,8 +92,8 @@ It supports installation and uses a service worker to cache assets for offline a
 
 1. **Sign in** — enter a name on the login screen and press **Continue**. Signing in again with the same name resumes the same account.
 2. **Place a task** — on the plan, click the location you want to mark. A draft marker appears and the creation panel opens.
-3. **Fill in the task** — provide a title and at least one checklist step; each step has a title. Add or remove steps as needed. Submit to save.
-4. **Manage tasks** — use the sidebar to browse your tasks; clicking a task focuses its marker on the plan.
+3. **Fill in the task** — enter a title. The checklist is pre-filled with three default steps (`Initial assessment`, `Installation`, `Final inspection`); edit them, add or remove steps, then submit to save.
+4. **Manage tasks** — clicking a marker on the plan opens the sidebar and expands that task; clicking a task in the sidebar expands or collapses its checklist.
 5. **Update progress** — edit a task's title, add/remove steps, and change step statuses from the checklist.
 
 ## Data storage
@@ -128,6 +137,12 @@ If I had more time, I would focus on the following refactoring and improvements.
 - **Task filtering** — introduce search, status filters, and grouping in the sidebar.
 - **Task progress** — improve status calculation and display checklist progress on markers and in the sidebar.
 - **Task and checklist editing** — improve the editing UI for a better user experience and refactor the update API to make partial updates more flexible and easier to extend.
+- **Name normalization** — sign-in only trims and lowercases the name, so visually identical names with different Unicode composition end up as separate accounts; add `normalize("NFC")` in the sign-in schema.
+
+### Accessibility
+
+- **Keyboard-only task creation** — placing a marker requires a mouse click on the plan; add a keyboard path to choose a position and open the creation panel.
+- **Tab order of collapsed tasks** — collapsing a task hides its checklist visually only (`grid-rows-[0fr]` + `overflow-hidden`); the buttons stay in the DOM, so Tab moves focus onto controls the user cannot see.
 
 ### Tests
 
